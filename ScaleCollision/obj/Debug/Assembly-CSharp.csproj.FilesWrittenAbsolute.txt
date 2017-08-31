@@ -1,0 +1,14 @@
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/UnityEngine.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/UnityEditor.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/UnityEngine.Analytics.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Mono.Cecil.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Unity.DataContract.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Mono.Cecil.Mdb.dll

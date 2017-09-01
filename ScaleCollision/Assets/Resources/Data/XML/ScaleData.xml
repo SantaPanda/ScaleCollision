@@ -1,20 +1,21 @@
 <root>
-	<item _id="0" imagePath_s = "left0" />
-	<item _id="1" imagePath_s = "left1" />
-	<item _id="2" imagePath_s = "left2" />
-	<item _id="3" imagePath_s = "left3" />
-	<item _id="4" imagePath_s = "left4" />
-	<item _id="5" imagePath_s = "left5" />
-	<item _id="6" imagePath_s = "left6" />
-	<item _id="7" imagePath_s = "left7" />
-	<item _id="8" imagePath_s = "right0" />
-	<item _id="9" imagePath_s = "right1" />
-	<item _id="10" imagePath_s = "right2" />
-	<item _id="11" imagePath_s = "right3" />
-	<item _id="12" imagePath_s = "right4" />
-	<item _id="13" imagePath_s = "right5" />
-	<item _id="14" imagePath_s = "right6" />
-	<item _id="15" imagePath_s = "right7" />
+	<item _id = "0" name_s = "left0" imagePath_s = "left0" />
+	<item _id = "1" name_s = "left1" imagePath_s = "left1" />
+	<item _id = "2" name_s = "left2" imagePath_s = "left2" />
+	<item _id = "3" name_s = "left3" imagePath_s = "left3" />
+	<item _id = "4" name_s = "left4" imagePath_s = "left4" />
+	<item _id = "5" name_s = "left5" imagePath_s = "left5" />
+	<item _id = "6" name_s = "left6" imagePath_s = "left6" />
+	<item _id = "7" name_s = "left7" imagePath_s = "left7" />
+	<item _id = "8" name_s = "right0" imagePath_s = "right0" />
+	<item _id = "9" name_s = "right1" imagePath_s = "right1" />
+	<item _id = "10" name_s = "right2" imagePath_s = "right2" />
+	<item _id = "11" name_s = "right3" imagePath_s = "right3" />
+	<item _id = "12" name_s = "right4" imagePath_s = "right4" />
+	<item _id = "13" name_s = "right5" imagePath_s = "right5" />
+	<item _id = "14" name_s = "right6" imagePath_s = "right6" />
+	<item _id = "15" name_s = "right7" imagePath_s = "right7" />
 </root>
 <!--_id:台阶id-->
+<!--name:台阶的名字-->
 <!--imagePath:图片的位置-->

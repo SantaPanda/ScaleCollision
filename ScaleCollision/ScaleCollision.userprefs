@@ -1,10 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Data/XML/ScaleData.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/XML/XMLHelper.cs">
     <Files>
-      <File FileName="Assets/Scripts/UI/GamePanel.cs" Line="42" Column="32" />
-      <File FileName="Assets/Scripts/UICtrl/UIScale.cs" Line="88" Column="51" />
-      <File FileName="Assets/Resources/Data/XML/ScaleData.xml" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/GamePanel.cs" Line="82" Column="15" />
+      <File FileName="Assets/Scripts/UICtrl/UIScale.cs" Line="19" Column="3" />
+      <File FileName="Assets/Resources/Data/XML/ScaleData.xml" Line="21" Column="1" />
+      <File FileName="Assets/Scripts/XML/ConfigData.cs" Line="29" Column="16" />
+      <File FileName="Assets/Scripts/XML/ConfigDataT.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Hero/Hero.cs" Line="8" Column="20" />
+      <File FileName="Assets/Scripts/Player/GamePlayer.cs" Line="28" Column="34" />
+      <File FileName="Assets/Scripts/XML/XMLHelper.cs" Line="7" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

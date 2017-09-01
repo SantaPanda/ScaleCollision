@@ -45,8 +45,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Data\XML\ScaleData.cs" />
+     <Compile Include="Assets\Scripts\Hero\Hero.cs" />
+     <Compile Include="Assets\Scripts\Player\GamePlayer.cs" />
      <Compile Include="Assets\Scripts\UI\GamePanel.cs" />
      <Compile Include="Assets\Scripts\UICtrl\UIScale.cs" />
+     <Compile Include="Assets\Scripts\XMLCtrl\ConfigData.cs" />
+     <Compile Include="Assets\Scripts\XMLCtrl\ConfigDataT.cs" />
+     <Compile Include="Assets\Scripts\XMLCtrl\XMLHelper.cs" />
      <None Include="Assets\Resources\Data\XML\ScaleData.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

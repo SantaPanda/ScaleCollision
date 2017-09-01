@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 //this class is to control UIScale.
-public class UIScale : MonoBehaviour {
+public class UIScale{
 	public int id;
 	public int ScaleId{ get; set;}
 
@@ -83,7 +83,6 @@ public class UIScale : MonoBehaviour {
         for (int i = 0; i < length; i++)
         {
             newScaleIdList.Add(tempList[i]);
-            Debug.Log("Sequenece" + tempList[i]);
         }
         for (int i = 0; i < length; i++)
         {

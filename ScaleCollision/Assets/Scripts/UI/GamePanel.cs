@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 
-public class GamePanel : MonoBehaviour 
+public class GamePanel : UIBase
 {
 
 	private Button JumpButton;
@@ -14,22 +14,36 @@ public class GamePanel : MonoBehaviour
     private List<Sprite> ScaleSprite = new List<Sprite>();
 	private List<UIScale> ScaleList = new List<UIScale>();
 
-	// Use this for initialization
-	void Awake () 
-	{
-		OnCreate ();
-	}
-	
+//    private static readonly string ScaleSpritePath1 = "Images/UI/GamePanel/left{0}";
+//    private static readonly string ScaleSpritePath2 = "Images/UI/GamePanel/right{0}";
+
+    private static readonly string ScaleSpritePath = "Images/UI/GamePanel/{0}";
+
+    private object lockScale = new object();
+
 	// Update is called once per frame
 	void Update () 
 	{
-	
 	}
 
-	public void OnCreate()
-	{
+    public override void OnShow(object param)
+    {
+        base.OnShow(param);
+        RefreshScale();
+    }
+
+    protected override void UIInit()
+    {
+        base.UIInit();
         InitialScale();
-        
+    }
+
+    public override void OnCreate()
+    {
+        //为了使用GameObject.Find();
+        CacheGameObject.SetActive(true);
+
+        base.OnCreate();
 		JumpButton = GameObject.Find("JumpButton").GetComponent<Button>();
         SkillButton = GameObject.Find("SkillButton").GetComponent<Button>();
         JumpButton.onClick.AddListener(() =>
@@ -40,46 +54,68 @@ public class GamePanel : MonoBehaviour
             {
                 this.OnClick(SkillButton.gameObject);
             });
+
+        this.UIInit();
+
+        CacheGameObject.SetActive(false);
 	}
 
-    public void InitialScale()
+    /// <summary>
+    /// Initials the scale.
+    /// </summary>
+    private void InitialScale()
     {
-        string path1 = "Images/UI/GamePanel/left{0}";
-        string path2 = "Images/UI/GamePanel/right{0}";
-        for (int i = 0; i < 8; i++)
+        foreach(var DScale in ScaleData.dataMap)
         {
-            Sprite tempSprite = Resources.Load(string.Format(path1, i), typeof(Sprite)) as Sprite;
+            Sprite tempSprite = Resources.Load(string.Format(ScaleSpritePath, DScale.Value.imagePath), typeof(Sprite)) as Sprite;
             ScaleSprite.Add(tempSprite);
-        }
-        for (int i = 0; i < 8; i++)
-        {
-            Sprite tempSprite = Resources.Load(string.Format(path2, i), typeof(Sprite)) as Sprite;
-            ScaleSprite.Add(tempSprite);
+            ScaleIdList.Add(DScale.Value.id);
+            ScaleList.Add(new UIScale(DScale.Value.id));
         }
 
-        for (int i = 0; i < 16; i++) 
-        {
-            ScaleIdList.Add(i);
-            ScaleList.Add (new UIScale(i));
-        }
+//        for (int i = 0; i < UIScale.oneSideNum; i++)
+//        {
+//            Sprite tempSprite = Resources.Load(string.Format(ScaleSpritePath1, i), typeof(Sprite)) as Sprite;
+//            ScaleSprite.Add(tempSprite);
+//        }
+//        for (int i = 0; i < UIScale.oneSideNum; i++)
+//        {
+//            Sprite tempSprite = Resources.Load(string.Format(ScaleSpritePath2, i), typeof(Sprite)) as Sprite;
+//            ScaleSprite.Add(tempSprite);
+//        }
+
+//        for (int i = 0; i < UIScale.oneSideNum*2; i++) 
+//        {
+//            ScaleIdList.Add(i);
+//            ScaleList.Add (new UIScale(i));
+//        }
     }
 
-    public void OnClick(GameObject go)
+    private void OnClick(GameObject go)
     {
         if (go == JumpButton.gameObject)
         {
-            ScaleIdList = UIScale.RandomScale(ScaleIdList);
-            for(int i=0; i<16; i++){
-                ScaleList[i].RefreshUI(ScaleIdList[i], ScaleSprite[ScaleIdList[i]]);
-            }
+            RefreshScale();
         }
         if (go == SkillButton.gameObject)
         {
         }
     }
 
-    public void OnHide()
+    private void RefreshScale()
     {
-        transform.gameObject.SetActive(false);
+        lock (lockScale)
+        {
+            ScaleIdList = UIScale.RandomScale(ScaleIdList);
+            ScaleIdList = UIScale.RandomScale(ScaleIdList);
+            for(int i=0; i<UIScale.oneSideNum*2; i++){
+                ScaleList[i].RefreshUI(ScaleIdList[i], ScaleSprite[ScaleIdList[i]]);
+            }
+        }
+    }
+
+    public override void OnHide()
+    {
+        base.OnHide();
     }
 }

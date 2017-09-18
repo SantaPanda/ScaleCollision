@@ -3,11 +3,8 @@ using System.Collections;
 
 public class GamePlayer 
 {
-    //该玩家操作的英雄的ID
-    public int heroId{ get; set;}
-
-    //该玩家操作的英雄的名字
-    public string heroName{ get; set;}
+    //该玩家操作的英雄
+    public Hero mHero{ get; set;}
 
     //该玩家是否是本人
     public bool isOwn{ get; set;}

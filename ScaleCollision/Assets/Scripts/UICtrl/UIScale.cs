@@ -10,8 +10,10 @@ public class UIScale{
 
     private string LeftScaleName = "Scale/LeftScale/LeftScale{0}";
     private string RightScaleName = "Scale/RightScale/RightScale{0}";
-    private static readonly int oneSideNum = 8;
+    public static readonly int oneSideNum = 8;
     private static readonly int oneScaleLength = 80;
+
+    private static object lock1 = new object();
 
 	public Image mScale;
 
@@ -60,34 +62,36 @@ public class UIScale{
     //Random Scales Sequence.
     public static List<int> RandomScale(List<int> ScaleIdList)
     {
-        int length = ScaleIdList.Count / 2;
-        int[] tempList = new int[length];
+        lock(lock1){
+            int length = ScaleIdList.Count / 2;
+            int[] tempList = new int[length];
 
-        for (int i = 0; i < length; i++)
-        {
-            tempList[i] = ScaleIdList[i];
-        }
+            for (int i = 0; i < length; i++)
+            {
+                tempList[i] = ScaleIdList[i];
+            }
 
-        //range pick 1-length, to avoid changing the white cloud(防止改变了两端的缓冲地带).
-        for (int i = 0; i < 100; i++)
-        {
-            int randomIndex1 = Random.Range(1, length);
-            int randomIndex2 = Random.Range(1, length);
-            int temp = tempList[randomIndex1];
-            tempList[randomIndex1] = tempList[randomIndex2];
-            tempList[randomIndex2] = temp;
-        }
+            //range pick 1-length, to avoid changing the white cloud(防止改变了两端的缓冲地带).
+            for (int i = 0; i < 100; i++)
+            {
+                int randomIndex1 = Random.Range(1, length);
+                int randomIndex2 = Random.Range(1, length);
+                int temp = tempList[randomIndex1];
+                tempList[randomIndex1] = tempList[randomIndex2];
+                tempList[randomIndex2] = temp;
+            }
 
-        List<int> newScaleIdList = new List<int>();
+            List<int> newScaleIdList = new List<int>();
 
-        for (int i = 0; i < length; i++)
-        {
-            newScaleIdList.Add(tempList[i]);
+            for (int i = 0; i < length; i++)
+            {
+                newScaleIdList.Add(tempList[i]);
+            }
+            for (int i = 0; i < length; i++)
+            {
+                newScaleIdList.Add(tempList[i]+oneSideNum);   
+            }
+            return newScaleIdList;
         }
-        for (int i = 0; i < length; i++)
-        {
-            newScaleIdList.Add(tempList[i]+oneSideNum);   
-        }
-        return newScaleIdList;
     }
 }

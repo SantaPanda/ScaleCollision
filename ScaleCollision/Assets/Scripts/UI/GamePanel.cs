@@ -24,6 +24,9 @@ public class GamePanel : UIBase
 	// Update is called once per frame
 	void Update () 
 	{
+        foreach(var Scale in ScaleList){
+            Scale.Update();
+        }
 	}
 
     public override void OnShow(object param)
@@ -106,7 +109,6 @@ public class GamePanel : UIBase
     {
         lock (lockScale)
         {
-            ScaleIdList = UIScale.RandomScale(ScaleIdList);
             ScaleIdList = UIScale.RandomScale(ScaleIdList);
             for(int i=0; i<UIScale.oneSideNum*2; i++){
                 ScaleList[i].RefreshUI(ScaleIdList[i], ScaleSprite[ScaleIdList[i]]);

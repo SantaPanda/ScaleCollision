@@ -17,6 +17,14 @@ public class UIScale{
 
 	public Image mScale;
 
+    public void Update(){
+        if (this.id == 1)
+        {
+            mScale.transform.localPosition = new Vector3(100, 100, 100);
+            Debug.Log("hhaa");
+        }
+    }
+
 	public UIScale(int id)
 	{
 		this.id = id;
@@ -47,15 +55,16 @@ public class UIScale{
     {
         float positionX = playerPosition.x;
         int ScalePositionId = 0;
-        if (positionX < 0)
-        {
-            float absPositionX = System.Math.Abs(positionX);
-            ScalePositionId = (int)(oneSideNum - absPositionX / oneScaleLength - 1);
-        }
-        else
-        {
-            ScalePositionId = (int)(2 * oneSideNum - positionX / oneScaleLength - 1);
-        }
+//        if (positionX < 0)
+//        {
+//            float absPositionX = System.Math.Abs(positionX);
+//            ScalePositionId = (int)(oneSideNum - absPositionX / oneScaleLength - 1);
+//        }
+//        else
+//        {
+//            ScalePositionId = (int)(2 * oneSideNum - positionX / oneScaleLength - 1);
+//        }
+        ScalePositionId = (int)(positionX / oneScaleLength);
         return ScalePositionId;
     }
 

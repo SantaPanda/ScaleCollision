@@ -52,7 +52,7 @@
      <Compile Include="Assets\Scripts\Hero\IHeroSkill.cs" />
      <Compile Include="Assets\Scripts\Player\GamePlayer.cs" />
      <Compile Include="Assets\Scripts\UI\GamePanel.cs" />
-     <Compile Include="Assets\Scripts\UI\SelectHerosPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\SelectHeroesPanel.cs" />
      <Compile Include="Assets\Scripts\UICtrl\UIBase.cs" />
      <Compile Include="Assets\Scripts\UICtrl\UIScale.cs" />
      <Compile Include="Assets\Scripts\UIManger\UIManger.cs" />

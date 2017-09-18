@@ -3,7 +3,7 @@
 
 public enum UIPanelType
 {
-    SelectHerosPanel,
+    SelectHeroesPanel,
     GamePanel
 }
 

@@ -84,7 +84,7 @@ public class UIManger
                 UIBase panel = GetUIPanel(tempUIPanelType);
                 panel.OnCreate();
             }
-            if (tempUIPanelType.ToString().Equals("SelectHerosPanel"))
+            if (tempUIPanelType.ToString().Equals("SelectHeroesPanel"))
             {
                 UIBase panel = GetUIPanel(tempUIPanelType);
                 panel.OnShow();

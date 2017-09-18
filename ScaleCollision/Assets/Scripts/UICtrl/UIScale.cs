@@ -17,21 +17,13 @@ public class UIScale{
 
 	public Image mScale;
 
-    public void Update(){
-        if (this.id == 1)
-        {
-            mScale.transform.localPosition = new Vector3(100, 100, 100);
-            Debug.Log("hhaa");
-        }
-    }
-
 	public UIScale(int id)
 	{
 		this.id = id;
-        SetUI();
+        OnCreate();
 	}
 
-	public void SetUI()
+	public void OnCreate()
 	{
         if (id < oneSideNum) 
         {

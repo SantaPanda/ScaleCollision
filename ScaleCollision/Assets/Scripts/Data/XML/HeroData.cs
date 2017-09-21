@@ -23,7 +23,7 @@ public class HeroData :ConfigDataT<HeroData>
     /// Gets or sets the HS expression.
     /// </summary>
     /// <value>The HS expression.</value>
-    public string HSExpression{ get; set;}
+    public string skillInfo{ get; set;}
 
     /// <summary>
     /// Gets or sets the hero sprite path.
@@ -43,12 +43,12 @@ public class HeroData :ConfigDataT<HeroData>
     /// <value>The hero portrait.</value>
     public string portrait{ get; set;}
 
-    public HeroData(int id, string heroName, string skillName, string HSExpression, string heroSprite, string stageShow, string portrait)
+    public HeroData(int id, string heroName, string skillName, string skillInfo, string heroSprite, string stageShow, string portrait)
     {
         this.id = id;
         this.heroName = heroName;
         this.skillName = skillName;
-        this.HSExpression = HSExpression;
+        this.skillInfo = skillInfo;
         this.heroSprite = heroSprite;
         this.stageShow = stageShow;
         this.portrait = portrait;

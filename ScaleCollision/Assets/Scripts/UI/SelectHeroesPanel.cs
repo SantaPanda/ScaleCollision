@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class SelectHeroesPanel : UIBase
 {
@@ -64,13 +65,14 @@ public class SelectHeroesPanel : UIBase
         }
     }
 
+    //GamePanel类
     private Button SureButton;
 
     private Image StageShow;
     private Image OwnPortrait;
     private Image OppoentPortrait;
 
-    private Text Time;
+    private Text TimerText;
 
     private float ScrollHeight;
     private float ItemHeight;
@@ -89,6 +91,9 @@ public class SelectHeroesPanel : UIBase
     private readonly static string portraitPath = "Images/UI/SelectHeroesPanel/Portrait/{0}";
 
     private int SelectHeroId;
+
+    private readonly float SelectHeroTime = 15;
+    private readonly float SelectSkinTime = 5;
     
     public SelectHeroesPanel()
     {
@@ -110,7 +115,7 @@ public class SelectHeroesPanel : UIBase
         OwnPortrait = transform.Find("OwnPortrait/Portrait").GetComponent<Image>();
         OppoentPortrait = transform.Find("OppoentPortrait/Portrait").GetComponent<Image>();
 
-        Time = transform.Find("Timer/Time").GetComponent<Text>();
+        TimerText = transform.Find("Timer/Time").GetComponent<Text>();
 
         HeroScroll = transform.Find("SelectionArea/HeroScroll").GetComponent<ScrollRect>();
         HeroContent = HeroScroll.transform.Find("Content").GetComponent<RectTransform>();
@@ -123,12 +128,21 @@ public class SelectHeroesPanel : UIBase
         InitHeroes();
     }
 
+    public override void OnShow(object param)
+    {
+        base.OnShow(param);
+        StartCoroutine(Countdown1());
+    }
+
     protected override void UIInit()
     {
         base.UIInit();
 
     }
 
+    /// <summary>
+    /// Inits the heroes.
+    /// </summary>
     #region show all heroes
     private void InitHeroes()
     {
@@ -161,7 +175,6 @@ public class SelectHeroesPanel : UIBase
     private void ClickHero(int heroId)
     {
         SelectHeroId = heroId;
-        Debug.Log(heroId);
         foreach (var DHero in HeroData.dataMap)
         {
             if (DHero.Value.id == SelectHeroId)
@@ -174,6 +187,9 @@ public class SelectHeroesPanel : UIBase
         }
     }
 
+    /// <summary>
+    /// 加载该界面时，根据用户的英雄拥有情况更新UI。
+    /// </summary>
     public override void RefreshUI()
     {
         base.RefreshUI();
@@ -191,6 +207,56 @@ public class SelectHeroesPanel : UIBase
         {
             tempHero.CancelClickEvent();
         }
+    }
+
+    /// <summary>
+    /// 第一次倒数之后，还没选择英雄，则默认选择初始第一个英雄。
+    /// </summary>
+    private void DefaultSelection()
+    {
+        if (SelectHeroId == 0)
+        {
+            SelectHeroId = HeroData.dataMap[0].id;
+
+            StageShow.sprite = Resources.Load(string.Format(stageShowPath, HeroData.dataMap[0].stageShow), typeof(Sprite)) as Sprite;
+            StageShow.gameObject.SetActive(true);
+            OwnPortrait.sprite = Resources.Load(string.Format(portraitPath, HeroData.dataMap[0].portrait), typeof(Sprite)) as Sprite;
+            OwnPortrait.gameObject.SetActive(true);
+            this.OnClick(SureButton.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// 倒数计时1,用于选择英雄的倒数计时.
+    /// </summary>
+    IEnumerator Countdown1()
+    {
+        for (float timer = SelectHeroTime; timer >= 0; timer -= Time.deltaTime)
+        {
+            int tempTimer = (int)timer;
+            TimerText.text = tempTimer.ToString();
+            yield return 0;
+        }
+
+        DefaultSelection();
+
+        StartCoroutine(Countdown2());
+    }
+
+    /// <summary>
+    /// 倒数计时2，用于选择皮肤的倒数计时
+    /// </summary>
+    IEnumerator Countdown2()
+    {
+        for (float timer = SelectSkinTime; timer >= 0; timer -= Time.deltaTime)
+        {
+            int tempTimer = (int)timer;
+            TimerText.text = tempTimer.ToString();
+            yield return 0;
+        }
+
+        UIManger.Instance.ShowPanel("GamePanel");
+        UIManger.Instance.HidePanel("SelectHeroesPanel");
     }
 }
 

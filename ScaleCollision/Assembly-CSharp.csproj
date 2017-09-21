@@ -45,18 +45,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Audio\AudioManger.cs" />
+     <Compile Include="Assets\Scripts\Data\DataCenter\DataCenter.cs" />
+     <Compile Include="Assets\Scripts\Data\PlayerData\PlayerData.cs" />
      <Compile Include="Assets\Scripts\Data\XML\HeroData.cs" />
      <Compile Include="Assets\Scripts\Data\XML\ScaleData.cs" />
+     <Compile Include="Assets\Scripts\Definition\EnumDataDef.cs" />
      <Compile Include="Assets\Scripts\GameEntrance\GameEntrance.cs" />
      <Compile Include="Assets\Scripts\Hero\Hero.cs" />
      <Compile Include="Assets\Scripts\Hero\IHeroSkill.cs" />
+     <Compile Include="Assets\Scripts\Input\InputPattern.cs" />
      <Compile Include="Assets\Scripts\Player\GamePlayer.cs" />
+     <Compile Include="Assets\Scripts\UI\AboutUsPanel.cs" />
      <Compile Include="Assets\Scripts\UI\GamePanel.cs" />
+     <Compile Include="Assets\Scripts\UI\LoginPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\MainPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\RegisterPanel.cs" />
      <Compile Include="Assets\Scripts\UI\SelectHeroesPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\TipPanel.cs" />
      <Compile Include="Assets\Scripts\UICtrl\UIBase.cs" />
      <Compile Include="Assets\Scripts\UICtrl\UIScale.cs" />
      <Compile Include="Assets\Scripts\UIManger\UIManger.cs" />
-     <Compile Include="Assets\Scripts\UIManger\UIPanelType.cs" />
      <Compile Include="Assets\Scripts\XMLCtrl\ConfigData.cs" />
      <Compile Include="Assets\Scripts\XMLCtrl\ConfigDataT.cs" />
      <Compile Include="Assets\Scripts\XMLCtrl\XMLHelper.cs" />

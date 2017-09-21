@@ -1,14 +1,14 @@
 ﻿<root>
-	<item _id = "10001" heroName_s = "小埋" skillName_s = "卖萌" HSExpression_s = "小埋最喜欢卖萌了" heroSprite_s = "xiaomai" stageShow_s = "stageShow_xiaomai" portrait_s = "portrait_xiaomai" />
-	<item _id = "10002" heroName_s = "小埋" skillName_s = "卖萌" HSExpression_s = "小埋最喜欢卖萌了" heroSprite_s = "xiaomai" stageShow_s = "stageShow_xiaomai" portrait_s = "portrait_xiaomai" />
-	<item _id = "10003" heroName_s = "小埋" skillName_s = "卖萌" HSExpression_s = "小埋最喜欢卖萌了" heroSprite_s = "xiaomai" stageShow_s = "stageShow_xiaomai" portrait_s = "portrait_xiaomai" />
-	<item _id = "10004" heroName_s = "小埋" skillName_s = "卖萌" HSExpression_s = "小埋最喜欢卖萌了" heroSprite_s = "xiaomai" stageShow_s = "stageShow_xiaomai" portrait_s = "portrait_xiaomai" />
+	<item _id = "10000" heroName_s = "小埋" skillName_s = "卖萌" skillInfo_s = "小埋最喜欢卖萌了" heroSprite_s = "xiaomai" stageShow_s = "stageShow_xiaomai" portrait_s = "portrait_xiaomai" />
+	<item _id = "20000" heroName_s = "小埋" skillName_s = "卖萌" skillInfo_s = "小埋最喜欢卖萌了" heroSprite_s = "xiaomai" stageShow_s = "stageShow_xiaomai" portrait_s = "portrait_xiaomai" />
+	<item _id = "30000" heroName_s = "小埋" skillName_s = "卖萌" skillInfo_s = "小埋最喜欢卖萌了" heroSprite_s = "xiaomai" stageShow_s = "stageShow_xiaomai" portrait_s = "portrait_xiaomai" />
+	<item _id = "40000" heroName_s = "小埋" skillName_s = "卖萌" skillInfo_s = "小埋最喜欢卖萌了" heroSprite_s = "xiaomai" stageShow_s = "stageShow_xiaomai" portrait_s = "portrait_xiaomai" />
 </root>
 
 <!--id:英雄id-->
 <!--heroName:英雄名字-->
 <!--skillName:英雄技能名字-->
-<!--HSExpression:英雄技能介绍-->
+<!--skillInfo:英雄技能介绍-->
 <!--heroSprite:英雄精灵地址-->
 <!--stageShow:英雄舞台展示-->
 <!--portrait:英雄头像-->

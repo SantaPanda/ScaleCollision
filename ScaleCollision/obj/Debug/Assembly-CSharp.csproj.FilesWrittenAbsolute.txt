@@ -12,3 +12,7 @@
 /Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/obj/Debug/Assembly-CSharp.dll
+/Users/Santa/Desktop/ScaleCollision/ScaleCollision/obj/Debug/Assembly-CSharp.dll.mdb

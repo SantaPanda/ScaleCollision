@@ -73,6 +73,7 @@ public class UIBase : MonoBehaviour
 
     /// <summary>
     /// /*Adds the element.*/
+    /// 添加新组件到该ChacheObject下，并且返回其的代码component.
     /// </summary>
     /// <returns>The element.</returns>
     /// <param name="childNode">Child node.</param>

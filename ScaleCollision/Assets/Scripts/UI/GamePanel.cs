@@ -10,6 +10,9 @@ public class GamePanel : UIBase
 	private Button JumpButton;
 	private Button SkillButton;
 
+    private RectTransform Player;
+    private Rigidbody2D PlayerRigi;
+
     private List<int> ScaleIdList = new List<int>();
     private List<Sprite> ScaleSprite = new List<Sprite>();
 	private List<UIScale> ScaleList = new List<UIScale>();
@@ -24,15 +27,16 @@ public class GamePanel : UIBase
 	// Update is called once per frame
 	void Update () 
 	{
-        foreach(var Scale in ScaleList){
-            Scale.Update();
-        }
 	}
 
     public override void OnShow(object param)
     {
         base.OnShow(param);
-        RefreshScale();
+    }
+
+    public override void OnHide()
+    {
+        base.OnHide();
     }
 
     protected override void UIInit()
@@ -47,6 +51,10 @@ public class GamePanel : UIBase
         CacheGameObject.SetActive(true);
 
         base.OnCreate();
+
+        Player = GameObject.Find("Player1").GetComponent<RectTransform>();
+        PlayerRigi = GameObject.Find("Player1").GetComponent<Rigidbody2D>();
+
 		JumpButton = GameObject.Find("JumpButton").GetComponent<Button>();
         SkillButton = GameObject.Find("SkillButton").GetComponent<Button>();
         JumpButton.onClick.AddListener(() =>
@@ -94,17 +102,37 @@ public class GamePanel : UIBase
 //        }
     }
 
+    private bool isJumping(Vector3 PlayerPosition)
+    {
+        Debug.Log(Player.localPosition);
+        if (PlayerPosition.y > -234)
+        {
+            return true;
+        }
+        return false;
+    }
+
     private void OnClick(GameObject go)
     {
         if (go == JumpButton.gameObject)
         {
-            RefreshScale();
+            if (!isJumping(Player.localPosition))
+            {
+                RefreshScale();
+                PlayerJump();
+                ScaleAnimation(UIScale.GetScalePositionId(Player.transform.localPosition));
+            }
         }
         if (go == SkillButton.gameObject)
         {
         }
     }
 
+
+
+    /// <summary>
+    /// 改变云的颜色
+    /// </summary>
     private void RefreshScale()
     {
         lock (lockScale)
@@ -116,8 +144,30 @@ public class GamePanel : UIBase
         }
     }
 
-    public override void OnHide()
+    /// <summary>
+    /// 实现人物跳跃
+    /// </summary>
+    private void PlayerJump()
     {
-        base.OnHide();
+        // PlayerRigi.velocity += new Vector2(0, 5); 
+        PlayerRigi.AddForce(Vector2.up * 50000);   //乘上每个台阶自带的高度（还没定义）
+    }
+
+    /// <summary>
+    /// 实现人物移动
+    /// </summary>
+    private void PlayerMove()
+    {
+        Player.transform.Translate(Vector2.right * 100 * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// 调用云的animation。
+    /// </summary>
+    /// <param name="ScaleIndex">Scale index.</param>
+    private void ScaleAnimation(int ScaleIndex)
+    {
+        if (ScaleIndex >= 0 && ScaleIndex < ScaleList.Count)
+            ScaleList[ScaleIndex].PlayAnimation();
     }
 }

@@ -17,6 +17,10 @@ public class UIScale{
 
 	public Image mScale;
 
+    private readonly string AnimatorPath = "Animator/ScaleAnimator/ScaleMove";
+    private Animator ScaleAnimator;
+    private RuntimeAnimatorController ScaleAnimatorController;
+
 	public UIScale(int id)
 	{
 		this.id = id;
@@ -33,6 +37,15 @@ public class UIScale{
             mScale = GameObject.Find (string.Format (RightScaleName, id-oneSideNum)).GetComponent<Image> ();
         }
         ScaleId = id;
+
+        if(!mScale.GetComponent<Animator>())
+        {
+            mScale.gameObject.AddComponent<Animator>();
+        }
+
+        ScaleAnimator = mScale.GetComponent<Animator>();
+
+        ScaleAnimator.runtimeAnimatorController = Resources.Load(AnimatorPath, typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
 	}
 
     public void RefreshUI(int ScaleId, Sprite sprite)
@@ -47,16 +60,16 @@ public class UIScale{
     {
         float positionX = playerPosition.x;
         int ScalePositionId = 0;
-//        if (positionX < 0)
-//        {
-//            float absPositionX = System.Math.Abs(positionX);
-//            ScalePositionId = (int)(oneSideNum - absPositionX / oneScaleLength - 1);
-//        }
-//        else
-//        {
-//            ScalePositionId = (int)(2 * oneSideNum - positionX / oneScaleLength - 1);
-//        }
-        ScalePositionId = (int)(positionX / oneScaleLength);
+        if (positionX < 0)
+        {
+            float absPositionX = System.Math.Abs(positionX);
+            ScalePositionId = (int)(oneSideNum - Mathf.Floor(absPositionX / oneScaleLength) - 1);
+        }
+        else
+        {
+            ScalePositionId = (int)(2 * oneSideNum - Mathf.Floor(positionX / oneScaleLength) - 1);
+        }
+        //ScalePositionId = (int)(positionX / oneScaleLength);
         return ScalePositionId;
     }
 
@@ -94,5 +107,13 @@ public class UIScale{
             }
             return newScaleIdList;
         }
+    }
+
+    /// <summary>
+    /// Play the animation of scale.
+    /// </summary>
+    public void PlayAnimation()
+    {
+        ScaleAnimator.SetTrigger("ScaleMove");
     }
 }

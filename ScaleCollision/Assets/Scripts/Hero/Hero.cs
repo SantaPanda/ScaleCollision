@@ -9,7 +9,7 @@ public abstract class Hero
 
     public string skillName{ get; set;}
 
-    public string HSExpression{ get; set;}
+    public string skillInfo{ get; set;}
     
     public bool hasUseSkill{ get; set;}
 

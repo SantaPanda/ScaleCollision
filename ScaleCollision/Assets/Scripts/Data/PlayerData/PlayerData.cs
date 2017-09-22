@@ -21,7 +21,7 @@ public class PlayerData
 
     public int PortraitId{ get; set;}
 
-    public bool isMusicOpen{ get; set;}
+    public bool isBgMusicOpen{ get; set;}
 
     public bool isSoundOpen{ get; set;}
 

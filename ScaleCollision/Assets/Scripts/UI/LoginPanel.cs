@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using EnumDataDef;
 
 public class LoginPanel : UIBase
 {
@@ -14,11 +15,15 @@ public class LoginPanel : UIBase
     public override void OnShow(object param)
     {
         base.OnShow(param);
+
+        AudioManager.Instance.PlayAudio(BGMId.LoginBGM.ToString(), loop: true, type: EnumDataDef.AudioType.BgMusic);
     }
 
     public override void OnHide()
     {
         base.OnHide();
+
+        AudioManager.Instance.StopAudio(BGMId.LoginBGM.ToString());
     }
 
     public override void OnCreate()
@@ -44,10 +49,15 @@ public class LoginPanel : UIBase
     {
         if (go == LoginButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.MainPanel.ToString());
+            UIManger.Instance.HidePanel(UIPanelType.LoginPanel.ToString());
         }
 
         if (go == RegisterButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.RegisterPanel.ToString());
         }
     }
 }

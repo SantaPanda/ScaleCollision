@@ -58,10 +58,12 @@
      <Compile Include="Assets\Scripts\Player\GamePlayer.cs" />
      <Compile Include="Assets\Scripts\UI\AboutUsPanel.cs" />
      <Compile Include="Assets\Scripts\UI\GamePanel.cs" />
+     <Compile Include="Assets\Scripts\UI\LogPanel.cs" />
      <Compile Include="Assets\Scripts\UI\LoginPanel.cs" />
      <Compile Include="Assets\Scripts\UI\MainPanel.cs" />
      <Compile Include="Assets\Scripts\UI\RegisterPanel.cs" />
      <Compile Include="Assets\Scripts\UI\SelectHeroesPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\SettingPanel.cs" />
      <Compile Include="Assets\Scripts\UI\TipPanel.cs" />
      <Compile Include="Assets\Scripts\UICtrl\UIBase.cs" />
      <Compile Include="Assets\Scripts\UICtrl\UIScale.cs" />

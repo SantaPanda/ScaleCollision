@@ -110,216 +110,187 @@ public class AudioManager
             }
         }
     }
+        
+    /// <summary>
+    /// 将所有音乐gameobject添加到该gameobject下，UICamera/AudioManger.
+    /// </summary>
+    private Transform mAudioMangerTransform;
+    private Transform AudioMangerTransform
+    {
+        get
+        {
+            if (mAudioMangerTransform == null)
+            {
+                mAudioMangerTransform = GameObject.Find("UICamera/AudioManger").transform;
+            }
+            return mAudioMangerTransform;
+        }
+    }
 
     private Dictionary<string, AudioUnit> AudioDic = new Dictionary<string, AudioUnit>();
 
-//    public AudioUnit PlayAudio(string audioId, Transform sender = null,bool loop = false, bool isPlayOnAwake = true, EnumDataDef.AudioType type = EnumDataDef.AudioType.Sound, float delay = 0f)
-//    {
-//        if(string.IsNullOrEmpty(audioId))
-//        {
-//            return null;
-//        }
-//
-//        if(type == EnumDataDef.AudioType.BgMusic)
-//        {
-//            if (!DataCenter.Instance.PlayerData.isMusicOpen)
-//            {
-//                return null;
-//            }
-//        }
-//        else
-//        {
-//            if (!DataCenter.Instance.PlayerData.isSoundOpen)
-//            {
-//                return null;
-//            }
-//        }
-//        AudioUnit unit;
-//        if(!AudioDic.ContainsKey(audioId))
-//        {
-//            AudioClip clip = Resources.Load<AudioClip>(string.Format(AUDIO_PATH, audioId));
-//            if(clip == null) 
-//            {
-//                Logger.Error(string.Format(AUDIO_PATH, audioId));
-//                return null;
-//            }
-//            GameObject go = new GameObject(string.Format(AUDIO_OBJECT_NAME, audioId));
-//            go.transform.parent = CameraManager.Instance.pMainCamera.pCamera.transform;
-//            go.transform.localPosition = Vector3.zero;
-//            AudioSource audioSrc = go.AddComponent<AudioSource>();
-//            audioSrc.clip = clip;
-//            audioSrc.loop = loop;
-//            audioSrc.playOnAwake = isPlayOnAwake;
-//            if (isPlayOnAwake)
-//            {
-//                audioSrc.PlayDelayed(delay);
-//            }
-//            unit = new AudioUnit(audioId, type, audioSrc);
-//            AudioDic.Add(audioId, unit);
-//        }
-//        else
-//        {
-//            unit = AudioDic[audioId];
-//            if (null != unit)
-//            {
-//                if (unit.pAudioSource.isPlaying)
-//                {
-//                    unit.Stop();
-//                }
-//                unit.Play(delay);
-//            }
-//        }
-//        //Debug.Log(audioId);
-//        return unit;
-//    }
-//
-//    public AudioUnit PlayAudioList(string audioId, Transform sender = null, bool loop = false, bool isPlayOnAwake = true, EnumDataDef.AudioType type = EnumDataDef.AudioType.Sound, float delay = 0f)
-//    {
-//        if (string.IsNullOrEmpty(audioId))
-//        {
-//            return null;
-//        }
-//
-//        if (type == EnumDataDef.AudioType.BgMusic)
-//        {
-//            if (!DataCenter.Instance.PlayerData.IsMusicOpen)
-//            {
-//                return null;
-//            }
-//        }
-//        else
-//        {
-//            if (!DataCenter.Instance.PlayerData.IsSoundOpen)
-//            {
-//                return null;
-//            }
-//        }
-//        AudioUnit unit;
-//        AudioClip clip = Resources.Load<AudioClip>(string.Format(AUDIO_PATH, audioId));
-//        if (clip == null)
-//        {
-//            Logger.Error(string.Format(AUDIO_PATH, audioId));
-//            return null;
-//        }
-//        GameObject go = new GameObject(string.Format(AUDIO_OBJECT_NAME, audioId));
-//        go.transform.parent = CameraManager.Instance.pMainCamera.pCamera.transform;
-//        go.transform.localPosition = Vector3.zero;
-//        AudioSource audioSrc = go.AddComponent<AudioSource>();
-//        audioSrc.clip = clip;
-//        audioSrc.loop = loop;
-//        audioSrc.playOnAwake = isPlayOnAwake;
-//        if (isPlayOnAwake)
-//        {
-//            audioSrc.PlayDelayed(delay);
-//        }
-//        unit = new AudioUnit(audioId, type, audioSrc);
-//        //AudioDic.Add(audioId, unit);
-//        return unit;
-//    }
-//
-//    public float GetAudioTime(string audioId)
-//    {
-//        if(AudioDic.ContainsKey(audioId))
-//        {
-//            return AudioDic[audioId].pAudioSource.clip.length;
-//        }
-//        return 0;
-//    }
-//
-//    public void StopAudio(string audioId)
-//    {
-//        if(AudioDic.ContainsKey(audioId))
-//        {
-//            AudioDic[audioId].Stop();
-//        }
-//    }
-//
-//    public void StopAllAudio()
-//    {
-//        foreach (string keyValue in AudioDic.Keys)
-//        {
-//            AudioDic[keyValue].Stop();
-//        }
-//    }
-//
-//    public void StopAllMusic()
-//    {
-//        foreach (string keyValue in AudioDic.Keys)
-//        {
-//            if (EnumDataDef.AudioType.Sound == AudioDic[keyValue].pAudioType)
-//            {
-//                AudioDic[keyValue].Stop();
-//            }
-//        }
-//    }
-//
-//    public void StopBackground()
-//    {
-//        foreach (string keyValue in AudioDic.Keys)
-//        {
-//            if (EnumDataDef.AudioType.BgMusic == AudioDic[keyValue].pAudioType)
-//            {
-//                AudioDic[keyValue].Stop();
-//            }
-//        }
-//    }
-//
-//    public bool IsHasAudio(string audioId)
-//    {
-//        return AudioDic.ContainsKey(audioId);
-//    }
-//
-//    /// <summary>
-//    /// Determines whether this instance is audio playing the specified audioType.
-//    /// 判断当前音乐音效是否正在播放
-//    /// </summary>
-//    /// <returns><c>true</c> if this instance is audio playing the specified audioType; otherwise, <c>false</c>.</returns>
-//    /// <param name="audioType">Audio type.</param>
-//    public bool IsAudioPlaying(string audioId)
-//    {
-//        bool isPlaying = false;
-//        if(AudioDic.ContainsKey(audioId))
-//        {
-//            AudioUnit unit = AudioDic[audioId];
-//            if (unit != null)
-//            {
-//                isPlaying = unit.pAudioSource.isPlaying;
-//            }
-//        }
-//        return isPlaying;
-//    }
-//
-//    public void RemoveAudio(string audioId)
-//    {
-//        if(AudioDic.ContainsKey(audioId))
-//        {
-//            AudioDic[audioId].Destroy();
-//            AudioDic.Remove(audioId);
-//        }
-//    }
-//
-//    public void ClearAllAudio()
-//    {
-//        if(AudioDic != null)
-//        {
-//            foreach(string keyValue in AudioDic.Keys)
-//            {
-//                AudioDic[keyValue].Stop();
-//            }
-//            //AudioDic.Clear();
-//        }
-//    }
-//
-//    public AudioUnit GetAudioUnit(string id)
-//    {
-//        if (AudioDic.ContainsKey(id))
-//        {
-//            return AudioDic[id];
-//        }
-//        return null;
-//    }
-//
-//
+    public AudioUnit PlayAudio(string audioId, Transform sender = null,bool loop = false, bool isPlayOnAwake = true, EnumDataDef.AudioType type = EnumDataDef.AudioType.Sound, float delay = 0f)
+    {
+        if(string.IsNullOrEmpty(audioId))
+        {
+            return null;
+        }
+
+        if(type == EnumDataDef.AudioType.BgMusic)
+        {
+            if (!DataCenter.Instance.playerData.isBgMusicOpen)
+            {
+                return null;
+            }
+        }
+        else
+        {
+            if (!DataCenter.Instance.playerData.isSoundOpen)
+            {
+                return null;
+            }
+        }
+        AudioUnit unit;
+        if(!AudioDic.ContainsKey(audioId))
+        {
+            AudioClip clip = Resources.Load<AudioClip>(string.Format(AUDIO_PATH, audioId));
+            if(clip == null) 
+            {
+                return null;
+            }
+            GameObject go = new GameObject(string.Format(AUDIO_OBJECT_NAME, audioId));
+            go.transform.parent = AudioMangerTransform;
+            go.transform.localPosition = Vector3.zero;
+            AudioSource audioSrc = go.AddComponent<AudioSource>();
+            audioSrc.clip = clip;
+            audioSrc.loop = loop;
+            audioSrc.playOnAwake = isPlayOnAwake;
+            if (isPlayOnAwake)
+            {
+                audioSrc.PlayDelayed(delay);
+            }
+            unit = new AudioUnit(audioId, type, audioSrc);
+            AudioDic.Add(audioId, unit);
+        }
+        else
+        {
+            unit = AudioDic[audioId];
+            if (null != unit)
+            {
+                if (unit.AudioSource.isPlaying)
+                {
+                    unit.Stop();
+                }
+                unit.Play(delay);
+            }
+        }
+        //Debug.Log(audioId);
+        return unit;
+    }
+
+    public float GetAudioTime(string audioId)
+    {
+        if(AudioDic.ContainsKey(audioId))
+        {
+            return AudioDic[audioId].AudioSource.clip.length;
+        }
+        return 0;
+    }
+
+    public void StopAudio(string audioId)
+    {
+        if(AudioDic.ContainsKey(audioId))
+        {
+            AudioDic[audioId].Stop();
+        }
+    }
+
+    public void StopAllAudio()
+    {
+        foreach (string keyValue in AudioDic.Keys)
+        {
+            AudioDic[keyValue].Stop();
+        }
+    }
+
+    public void StopAllMusic()
+    {
+        foreach (string keyValue in AudioDic.Keys)
+        {
+            if (EnumDataDef.AudioType.Sound == AudioDic[keyValue].AudioType)
+            {
+                AudioDic[keyValue].Stop();
+            }
+        }
+    }
+
+    public void StopBackground()
+    {
+        foreach (string keyValue in AudioDic.Keys)
+        {
+            if (EnumDataDef.AudioType.BgMusic == AudioDic[keyValue].AudioType)
+            {
+                AudioDic[keyValue].Stop();
+            }
+        }
+    }
+
+    public bool IsHasAudio(string audioId)
+    {
+        return AudioDic.ContainsKey(audioId);
+    }
+
+    /// <summary>
+    /// Determines whether this instance is audio playing the specified audioType.
+    /// 判断当前音乐音效是否正在播放
+    /// </summary>
+    /// <returns><c>true</c> if this instance is audio playing the specified audioType; otherwise, <c>false</c>.</returns>
+    /// <param name="audioType">Audio type.</param>
+    public bool IsAudioPlaying(string audioId)
+    {
+        bool isPlaying = false;
+        if(AudioDic.ContainsKey(audioId))
+        {
+            AudioUnit unit = AudioDic[audioId];
+            if (unit != null)
+            {
+                isPlaying = unit.AudioSource.isPlaying;
+            }
+        }
+        return isPlaying;
+    }
+
+    public void RemoveAudio(string audioId)
+    {
+        if(AudioDic.ContainsKey(audioId))
+        {
+            AudioDic[audioId].Destroy();
+            AudioDic.Remove(audioId);
+        }
+    }
+
+    public void ClearAllAudio()
+    {
+        if(AudioDic != null)
+        {
+            foreach(string keyValue in AudioDic.Keys)
+            {
+                AudioDic[keyValue].Stop();
+            }
+            //AudioDic.Clear();
+        }
+    }
+
+    public AudioUnit GetAudioUnit(string id)
+    {
+        if (AudioDic.ContainsKey(id))
+        {
+            return AudioDic[id];
+        }
+        return null;
+    }
+
+
 //    protected override void OnSystemInit()
 //    {
 //        base.OnSystemInit();
@@ -378,18 +349,18 @@ public class AudioManager
 //        }
 //        Debug.Log("Application Focus " + focus);
 //    }
-
-    private IEnumerator Refocus()
-    {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        AudioListener.pause = false;
-        foreach (string keyValue in AudioDic.Keys)
-        {
-            AudioDic[keyValue].ResumeAudio(true);
-        }
-    }
+//
+//    private IEnumerator Refocus()
+//    {
+//        yield return new WaitForEndOfFrame();
+//        yield return new WaitForEndOfFrame();
+//        yield return new WaitForEndOfFrame();
+//        AudioListener.pause = false;
+//        foreach (string keyValue in AudioDic.Keys)
+//        {
+//            AudioDic[keyValue].ResumeAudio(true);
+//        }
+//    }
 
     //protected override void OnSystemLevelWasLoaded(int levelId)
     //{

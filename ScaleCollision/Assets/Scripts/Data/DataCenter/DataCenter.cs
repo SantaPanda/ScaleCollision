@@ -17,7 +17,20 @@ public class DataCenter
         }   
     }
   
-    public PlayerData PlayerData{ get; set;}
+    private PlayerData mPlayerData;
+    public PlayerData playerData
+    { 
+        get
+        {
+            if (mPlayerData == null)
+            {
+                mPlayerData = new PlayerData();
+                mPlayerData.isBgMusicOpen = true;
+                mPlayerData.isSoundOpen = true;
+            }
+            return mPlayerData;
+        } 
+    }
 
     public DataCenter()
     {

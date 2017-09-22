@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using EnumDataDef;
 
 public class MainPanel : UIBase
 {
@@ -21,11 +22,15 @@ public class MainPanel : UIBase
     public override void OnShow(object param)
     {
         base.OnShow(param);
+
+        AudioManager.Instance.PlayAudio(BGMId.MainPanelBGM.ToString(), loop: true, type: EnumDataDef.AudioType.BgMusic);
     }
 
     public override void OnHide()
     {
         base.OnHide();
+
+        AudioManager.Instance.StopAudio(BGMId.MainPanelBGM.ToString());
     }
 
     public override void OnCreate()
@@ -73,11 +78,14 @@ public class MainPanel : UIBase
     {
         if (go == AboutUsButton.gameObject)
         {
-            UIManger.Instance.ShowPanel("AboutUsPanel");
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.AboutUsPanel.ToString());
         }
 
         if (go == SettingButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.SettingPanel.ToString());
         }
 
         if (go == ShopButton.gameObject)
@@ -86,10 +94,15 @@ public class MainPanel : UIBase
 
         if (go == LogButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.LogPanel.ToString());
         }
 
         if (go == StartGameButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.SelectHeroesPanel.ToString());
+            UIManger.Instance.HidePanel(UIPanelType.MainPanel.ToString());
         }
 
         if (go == PortraitButton.gameObject)

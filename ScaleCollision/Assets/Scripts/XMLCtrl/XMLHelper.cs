@@ -45,7 +45,6 @@ public class XMLHelper
 
         XmlNodeList xmlNodeListT = xmlNodeT.ChildNodes;
 
-        int count = 0;
         foreach (XmlNode tempXmlNode in xmlNodeListT)
         {
             XmlAttributeCollection tempCol = tempXmlNode.Attributes;
@@ -53,8 +52,10 @@ public class XMLHelper
             object[] tempParams = new object[tempCol.Count];
 
             int index = 0;
+            int dataId = 0;
             foreach (PropertyInfo tempPropertyInfo in propertyInfos)
             {
+                
                 try
                 {
                     string tempPropertyName = tempPropertyInfo.Name;
@@ -63,7 +64,8 @@ public class XMLHelper
                     Type paramType = tempPropertyInfo.PropertyType;
                     if (tempPropertyName.Equals("id"))
                     {
-                        tempParams[index++] = Int32.Parse(tempCol["_id"].Value);
+                        dataId = Int32.Parse(tempCol["_id"].Value);
+                        tempParams[index++] = dataId;
                     }
                     else if (paramType == typeof(Int32))
                     {
@@ -80,7 +82,7 @@ public class XMLHelper
                 }
             }
             T tempT = XMLHelper.Create<T>(tempParams);
-            map.Add(count++, tempT);
+            map.Add(dataId, tempT);
         }
 
 

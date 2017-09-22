@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using EnumDataDef;
 
 public class SelectHeroesPanel : UIBase
 {
@@ -92,6 +93,8 @@ public class SelectHeroesPanel : UIBase
 
     private int SelectHeroId;
 
+    private bool isSelect = false;
+
     private readonly float SelectHeroTime = 15;
     private readonly float SelectSkinTime = 5;
     
@@ -131,7 +134,16 @@ public class SelectHeroesPanel : UIBase
     public override void OnShow(object param)
     {
         base.OnShow(param);
+
+        AudioManager.Instance.PlayAudio(BGMId.SelectHeroBGM.ToString(), loop: true, type: EnumDataDef.AudioType.BgMusic);
         StartCoroutine(Countdown1());
+    }
+
+    public override void OnHide()
+    {
+        base.OnHide();
+
+        AudioManager.Instance.StopAudio(BGMId.SelectHeroBGM.ToString());
     }
 
     protected override void UIInit()
@@ -163,7 +175,12 @@ public class SelectHeroesPanel : UIBase
     {
         if (go == SureButton.gameObject)
         {
-            StopSelection();
+            if (SelectHeroId != 0 && !isSelect)
+            {
+                StopSelection();
+                AudioManager.Instance.PlayAudio(SoundId.SelectHeroSound.ToString());
+                isSelect = true;
+            }
         }
     }
 
@@ -175,15 +192,24 @@ public class SelectHeroesPanel : UIBase
     private void ClickHero(int heroId)
     {
         SelectHeroId = heroId;
-        foreach (var DHero in HeroData.dataMap)
+//        foreach (var DHero in HeroData.dataMap)
+//        {
+//            if (DHero.Value.id == SelectHeroId)
+//            {
+//                StageShow.sprite = Resources.Load(string.Format(stageShowPath, DHero.Value.stageShow), typeof(Sprite)) as Sprite;
+//                StageShow.gameObject.SetActive(true);
+//                OwnPortrait.sprite = Resources.Load(string.Format(portraitPath, DHero.Value.portrait), typeof(Sprite)) as Sprite;
+//                OwnPortrait.gameObject.SetActive(true);
+//            }
+//        }
+        if(HeroData.dataMap.ContainsKey(SelectHeroId))
         {
-            if (DHero.Value.id == SelectHeroId)
-            {
-                StageShow.sprite = Resources.Load(string.Format(stageShowPath, DHero.Value.stageShow), typeof(Sprite)) as Sprite;
-                StageShow.gameObject.SetActive(true);
-                OwnPortrait.sprite = Resources.Load(string.Format(portraitPath, DHero.Value.portrait), typeof(Sprite)) as Sprite;
-                OwnPortrait.gameObject.SetActive(true);
-            }
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            
+            StageShow.sprite = Resources.Load(string.Format(stageShowPath, HeroData.dataMap[SelectHeroId].stageShow), typeof(Sprite)) as Sprite;
+            StageShow.gameObject.SetActive(true);
+            OwnPortrait.sprite = Resources.Load(string.Format(portraitPath, HeroData.dataMap[SelectHeroId].portrait), typeof(Sprite)) as Sprite;
+            OwnPortrait.gameObject.SetActive(true);
         }
     }
 
@@ -214,7 +240,7 @@ public class SelectHeroesPanel : UIBase
     /// </summary>
     private void DefaultSelection()
     {
-        if (SelectHeroId == 0)
+        if (!isSelect)
         {
             SelectHeroId = HeroData.dataMap[0].id;
 
@@ -223,6 +249,8 @@ public class SelectHeroesPanel : UIBase
             OwnPortrait.sprite = Resources.Load(string.Format(portraitPath, HeroData.dataMap[0].portrait), typeof(Sprite)) as Sprite;
             OwnPortrait.gameObject.SetActive(true);
             this.OnClick(SureButton.gameObject);
+
+            AudioManager.Instance.PlayAudio(SoundId.SelectHeroSound.ToString());
         }
     }
 
@@ -255,8 +283,8 @@ public class SelectHeroesPanel : UIBase
             yield return 0;
         }
 
-        UIManger.Instance.ShowPanel("GamePanel");
-        UIManger.Instance.HidePanel("SelectHeroesPanel");
+        UIManger.Instance.ShowPanel(UIPanelType.GamePanel.ToString());
+        UIManger.Instance.HidePanel(UIPanelType.SelectHeroesPanel.ToString());
     }
 }
 

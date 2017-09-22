@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using EnumDataDef;
 
 
 public class GamePanel : UIBase
@@ -27,16 +28,21 @@ public class GamePanel : UIBase
 	// Update is called once per frame
 	void Update () 
 	{
+        PlayerMove();
 	}
 
     public override void OnShow(object param)
     {
         base.OnShow(param);
+
+        AudioManager.Instance.PlayAudio(BGMId.GameBGM.ToString(), loop: true, type: EnumDataDef.AudioType.BgMusic);
     }
 
     public override void OnHide()
     {
         base.OnHide();
+
+        AudioManager.Instance.StopAudio(BGMId.GameBGM.ToString());
     }
 
     protected override void UIInit()
@@ -104,7 +110,6 @@ public class GamePanel : UIBase
 
     private bool isJumping(Vector3 PlayerPosition)
     {
-        Debug.Log(Player.localPosition);
         if (PlayerPosition.y > -234)
         {
             return true;
@@ -118,6 +123,8 @@ public class GamePanel : UIBase
         {
             if (!isJumping(Player.localPosition))
             {
+                AudioManager.Instance.PlayAudio(SoundId.Jump.ToString());
+
                 RefreshScale();
                 PlayerJump();
                 ScaleAnimation(UIScale.GetScalePositionId(Player.transform.localPosition));

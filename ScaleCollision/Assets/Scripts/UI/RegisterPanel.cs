@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using EnumDataDef;
 
 public class RegisterPanel : UIBase 
 {
@@ -46,10 +47,13 @@ public class RegisterPanel : UIBase
     {
         if (go == ReturnButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.HidePanel(UIPanelType.RegisterPanel.ToString());
         }
 
         if (go == RegisterButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
             InputPattern.RegisterInputJudge(Account.text, Password.text, CheckPassword.text);
         }
     }

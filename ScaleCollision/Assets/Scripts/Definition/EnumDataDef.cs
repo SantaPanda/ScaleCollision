@@ -13,6 +13,8 @@ namespace EnumDataDef
         MainPanel,    //主界面
         SelectHeroesPanel,    //选择英雄界面
         AboutUsPanel,     //关于我们界面
+        LogPanel,     //战绩界面
+        SettingPanel,     //设置界面
         GamePanel,     //游戏界面
         TipPanel,     //提示界面
     }
@@ -55,5 +57,31 @@ namespace EnumDataDef
         hero2 = 20000,
         hero3 = 30000,
         hero4 = 20000,
+    }
+
+    /// <summary>
+    /// BGMId.
+    /// </summary>
+    public enum BGMId
+    {
+        LoginBGM,     //登录BGM
+        MainPanelBGM,    //主界面BGM
+        SelectHeroBGM,    //选择英雄BGM
+        GameBGM,    //游戏BGM
+    }
+
+    /// <summary>
+    /// SoundId.
+    /// </summary>
+    public enum SoundId
+    {
+        Cancel,    //取消音效
+        Lose,    //失败音效
+        Click,    //点击音效
+        Win,    //胜利音效
+        Jump,    //跳跃音效
+        SelectHeroSound,    //选择英雄音效
+        On,    //设置On音效
+        Off,    //设置Off音效
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using EnumDataDef;
 
 public class UIManger
 {
@@ -44,16 +45,16 @@ public class UIManger
     /// <summary>
     /// 保存所有界面的UIBase组件。
     /// </summary>
-    private Dictionary<EnumDataDef.UIPanelType, UIBase> mDicUI;
+    private Dictionary<UIPanelType, UIBase> mDicUI;
 
-    private static readonly string StartPanel = "LoginPanel";
+    private static readonly UIPanelType StartPanel = UIPanelType.LoginPanel;
 
     /// <summary>
     /// 添加UI（用于管理）
     /// </summary>
     /// <param name="UIType">UI界面的类型，枚举列出</param>
     /// <param name="newUI">New U.</param>
-    public void AddUI(EnumDataDef.UIPanelType UIType,UIBase newUI)
+    public void AddUI(UIPanelType UIType,UIBase newUI)
     {
         if (newUI != null && UIType != null)
         {
@@ -66,7 +67,7 @@ public class UIManger
     /// </summary>
     /// <param name="UIType">UI界面的类型，枚举列出</param>
     /// <param name="oldUI">Old U.</param>
-    public void RemoveUI(EnumDataDef.UIPanelType UIType, UIBase oldUI)
+    public void RemoveUI(UIPanelType UIType, UIBase oldUI)
     {
         if (oldUI != null && UIType != null)
         {
@@ -79,14 +80,14 @@ public class UIManger
     /// </summary>
     public void InitAllUI()
     {
-        foreach (EnumDataDef.UIPanelType tempUIPanelType in System.Enum.GetValues(typeof(EnumDataDef.UIPanelType)))
+        foreach (UIPanelType tempUIPanelType in System.Enum.GetValues(typeof(UIPanelType)))
         {
             if (tempUIPanelType != null)
             {
                 UIBase panel = GetUIPanel(tempUIPanelType);
                 panel.OnCreate();
             }
-            if (tempUIPanelType.ToString().Equals("MainPanel"))
+            if (tempUIPanelType.ToString().Equals(StartPanel.ToString()))
             {
                 UIBase panel = GetUIPanel(tempUIPanelType);
                 panel.OnShow();
@@ -100,7 +101,7 @@ public class UIManger
     /// <param name="UIPanelName">User interface panel name.</param>
     public void ShowPanel(string UIPanelName)
     {
-        foreach (EnumDataDef.UIPanelType tempUIPanelType in System.Enum.GetValues(typeof(EnumDataDef.UIPanelType)))
+        foreach (UIPanelType tempUIPanelType in System.Enum.GetValues(typeof(UIPanelType)))
         {
             if (tempUIPanelType.ToString().Equals(UIPanelName))
             {
@@ -112,7 +113,7 @@ public class UIManger
 
     public void HidePanel(string UIPanelName)
     {
-        foreach (EnumDataDef.UIPanelType tempUIPanelType in System.Enum.GetValues(typeof(EnumDataDef.UIPanelType)))
+        foreach (UIPanelType tempUIPanelType in System.Enum.GetValues(typeof(UIPanelType)))
         {
             if (tempUIPanelType.ToString().Equals(UIPanelName))
             {
@@ -128,11 +129,11 @@ public class UIManger
     /// </summary>
     /// <returns>The UIpanel.</returns>
     /// <param name="panelType">Panel type.</param>
-    public UIBase GetUIPanel(EnumDataDef.UIPanelType panelType)
+    public UIBase GetUIPanel(UIPanelType panelType)
     {
         if (mDicUI == null)
         {
-            mDicUI = new Dictionary<EnumDataDef.UIPanelType, UIBase>();
+            mDicUI = new Dictionary<UIPanelType, UIBase>();
         }
             
         UIBase panel;

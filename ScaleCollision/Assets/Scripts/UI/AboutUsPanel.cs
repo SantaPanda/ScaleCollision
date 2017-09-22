@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using EnumDataDef;
 
 public class AboutUsPanel : UIBase
 {
@@ -32,7 +33,8 @@ public class AboutUsPanel : UIBase
     {
         if (go == SureButton.gameObject)
         {
-            UIManger.Instance.HidePanel("AboutUsPanel");
+            AudioManager.Instance.PlayAudio(SoundId.Cancel.ToString());
+            UIManger.Instance.HidePanel(UIPanelType.AboutUsPanel.ToString());
         }
     }
 }

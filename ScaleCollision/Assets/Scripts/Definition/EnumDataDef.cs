@@ -81,6 +81,7 @@ namespace EnumDataDef
         Win,    //胜利音效
         Jump,    //跳跃音效
         SelectHeroSound,    //选择英雄音效
+        StartGame,     //转场音效
         On,    //设置On音效
         Off,    //设置Off音效
     }

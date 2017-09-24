@@ -205,9 +205,28 @@ public class SelectHeroesPanel : UIBase
         if(HeroData.dataMap.ContainsKey(SelectHeroId))
         {
             AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
-            
+            ShowStage(heroId);
+            ShowOwnPortrait(heroId);
+        }
+    }
+
+    private void ShowStage(int heroId)
+    {
+        if(HeroData.dataMap.ContainsKey(heroId))
+        {
             StageShow.sprite = Resources.Load(string.Format(stageShowPath, HeroData.dataMap[SelectHeroId].stageShow), typeof(Sprite)) as Sprite;
             StageShow.gameObject.SetActive(true);
+
+            //StageShow的图片大小不统一，setNativeSize,缩小。
+            StageShow.SetNativeSize();
+            StageShow.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        }
+    }
+
+    private void ShowOwnPortrait(int heroId)
+    {
+        if (HeroData.dataMap.ContainsKey(heroId))
+        {
             OwnPortrait.sprite = Resources.Load(string.Format(portraitPath, HeroData.dataMap[SelectHeroId].portrait), typeof(Sprite)) as Sprite;
             OwnPortrait.gameObject.SetActive(true);
         }
@@ -242,12 +261,10 @@ public class SelectHeroesPanel : UIBase
     {
         if (!isSelect)
         {
-            SelectHeroId = HeroData.dataMap[0].id;
+            SelectHeroId = HeroData.dataMap[10000].id;
+            ShowStage(SelectHeroId);
+            ShowOwnPortrait(SelectHeroId);
 
-            StageShow.sprite = Resources.Load(string.Format(stageShowPath, HeroData.dataMap[0].stageShow), typeof(Sprite)) as Sprite;
-            StageShow.gameObject.SetActive(true);
-            OwnPortrait.sprite = Resources.Load(string.Format(portraitPath, HeroData.dataMap[0].portrait), typeof(Sprite)) as Sprite;
-            OwnPortrait.gameObject.SetActive(true);
             this.OnClick(SureButton.gameObject);
 
             AudioManager.Instance.PlayAudio(SoundId.SelectHeroSound.ToString());
@@ -280,6 +297,13 @@ public class SelectHeroesPanel : UIBase
         {
             int tempTimer = (int)timer;
             TimerText.text = tempTimer.ToString();
+
+            //s剩下一秒进入游戏时，播放音效。
+            if (timer == 1)
+            {
+                AudioManager.Instance.PlayAudio(SoundId.StartGame.ToString());
+            }
+
             yield return 0;
         }
 

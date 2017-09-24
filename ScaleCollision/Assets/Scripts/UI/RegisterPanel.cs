@@ -54,7 +54,28 @@ public class RegisterPanel : UIBase
         if (go == RegisterButton.gameObject)
         {
             AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
-            InputPattern.RegisterInputJudge(Account.text, Password.text, CheckPassword.text);
+            int inputType = InputPattern.RegisterInputJudge(Account.text, Password.text, CheckPassword.text);
+            if (inputType == 1)
+            {
+                httpClient http = new httpClient();
+                int response = http.Register(Account.text, Password.text);
+                if (response == 1)
+                {
+                    TipPanel.ShowTip("恭喜，注册成功！");
+                }
+                else
+                {
+                    TipPanel.ShowTip("抱歉，注册失败！");
+                }
+            }
+            else if (inputType == 0)
+            {
+                TipPanel.ShowTip("账号或密码不符合要求！");
+            }
+            else
+            {
+                TipPanel.ShowTip("两次密码输入不同！");
+            }
         }
     }
 }

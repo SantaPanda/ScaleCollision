@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using EnumDataDef;
 
 public class TipPanel : UIBase
 {
@@ -10,10 +11,13 @@ public class TipPanel : UIBase
     private Button ReturnButton2;
 
     private Text Tip;
+    public static string message = "";
 
     public override void OnShow(object param)
     {
         base.OnShow(param);
+
+        this.RefreshMessage();
     }
 
     public override void OnHide()
@@ -48,6 +52,8 @@ public class TipPanel : UIBase
     {
         if (go == SureButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.HidePanel(UIPanelType.TipPanel.ToString());
         }
 
         if (go == ReturnButton1.gameObject)
@@ -57,6 +63,17 @@ public class TipPanel : UIBase
         if (go == ReturnButton2.gameObject)
         {
         }
+    }
+
+    private void RefreshMessage()
+    {
+        Tip.text = message;
+    }
+
+    public static void ShowTip(string message)
+    {
+        TipPanel.message = message;
+        UIManger.Instance.ShowPanel(UIPanelType.TipPanel.ToString());
     }
 }
 

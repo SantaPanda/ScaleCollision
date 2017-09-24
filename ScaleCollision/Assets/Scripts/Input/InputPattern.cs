@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 public class InputPattern
 {
-    public readonly static string accountPattern = @"^([0-9]|[A-z]){4,10}$";
+    public readonly static string accountPattern = @"^([0-9]{11})$";
     public readonly static string passwordPattern = @"^([0-9]|[A-z]){4,10}$";
     
     public InputPattern()
@@ -28,21 +28,25 @@ public class InputPattern
         return true;
     }
 
-    public static bool RegisterInputJudge(string account, string password, string checkPassword)
+    /// <summary>
+    /// Registers the input judge.
+    /// </summary>
+    /// <returns>返回值0代表账号或密码错误，1代表成功，2代表密码重复错误。</returns>
+    public static int RegisterInputJudge(string account, string password, string checkPassword)
     {
         if (!isLegalInput(account, accountPattern))
         {
-            return false;
+            return 0;
         }
         if (!isLegalInput(password, passwordPattern))
         {
-            return false;
+            return 0;
         }
         if (!password.Equals(checkPassword))
         {
-            return false;
+            return 2;
         }
-        return true;
+        return 1;
     }
 }
 

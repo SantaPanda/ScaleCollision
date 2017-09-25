@@ -135,6 +135,7 @@ public class SelectHeroesPanel : UIBase
     {
         base.OnShow(param);
 
+        AudioManager.Instance.StopAudio(BGMId.MainPanelBGM.ToString());
         AudioManager.Instance.PlayAudio(BGMId.SelectHeroBGM.ToString(), loop: true, type: EnumDataDef.AudioType.BgMusic);
         StartCoroutine(Countdown1());
     }
@@ -307,6 +308,7 @@ public class SelectHeroesPanel : UIBase
             yield return 0;
         }
 
+        DataCenter.Instance.playerData.heroSelectId = SelectHeroId;
         UIManger.Instance.ShowPanel(UIPanelType.GamePanel.ToString());
         UIManger.Instance.HidePanel(UIPanelType.SelectHeroesPanel.ToString());
     }

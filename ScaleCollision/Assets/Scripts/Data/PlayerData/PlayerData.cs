@@ -25,15 +25,39 @@ public class PlayerData
 
     public bool isSoundOpen{ get; set;}
 
+    public int heroSelectId{ get; set;}
+
     /// <summary>
     /// 英雄拥有情况。
     /// </summary>
-    public Dictionary<int, bool> heroes{ get; set;}
+    private Dictionary<int, bool> mHeroes;
+    public Dictionary<int, bool> heroes
+    { 
+        get
+        {
+            if (mHeroes == null)
+            {
+                mHeroes = new Dictionary<int, bool>();
+            }
+            return mHeroes;
+        } 
+    }
 
     /// <summary>
     /// 皮肤拥有情况。
     /// </summary>
-    public Dictionary<int, bool> skin{ get; set;}
+    private Dictionary<int, bool> mSkin;
+    public Dictionary<int, bool> skin
+    { 
+        get
+        {
+            if (mSkin == null)
+            {
+                mSkin = new Dictionary<int, bool>();
+            }
+            return mSkin;
+        } 
+    }
 
     public int gameCount{ get; set;}
 

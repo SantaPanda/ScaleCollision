@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using EnumDataDef;
+using LitJson;
 
 public class LogPanel : UIBase
 {
@@ -12,14 +13,11 @@ public class LogPanel : UIBase
     private Text Win;
     private Text Lose;
 
-    private int totalCount = 233;
-    private int winCount = 122;
-    private int loseCount = 111;
-
     public override void OnShow(object param)
     {
         base.OnShow(param);
         RefreshUI();
+
     }
 
     public override void OnHide()
@@ -56,9 +54,20 @@ public class LogPanel : UIBase
     {
         base.RefreshUI();
 
-        Total.text = totalCount.ToString();
-        Win.text = winCount.ToString();
-        Lose.text = loseCount.ToString();
+        httpClient http = new httpClient();
+        JsonData json = http.GetGameRecord(DataCenter.Instance.playerData.userId);
+        int isSuccess = DataManger.Instance.AnalyzeLogJson(json);
+        if (isSuccess == 1)
+        {
+            Total.text = DataCenter.Instance.playerData.gameCount.ToString();
+            Win.text = DataCenter.Instance.playerData.winCount.ToString();
+            Lose.text = DataCenter.Instance.playerData.loseCount.ToString();
+        }
+        else
+        {
+            this.OnClick(SureButton.gameObject);
+            TipPanel.ShowTip("抱歉，无法获取战绩!");
+        }
     }
 }
 

@@ -15,6 +15,8 @@ public class MainPanel : UIBase
     private Button StartGameButton;
     private Button PortraitButton;
 
+    private readonly string PortraitPath = "Images/UI/SelectHeroesPanel/Portrait/{0}";
+
     private Text UserName;
     private Text Golds;
     private Text Cash;
@@ -24,13 +26,12 @@ public class MainPanel : UIBase
         base.OnShow(param);
 
         AudioManager.Instance.PlayAudio(BGMId.MainPanelBGM.ToString(), loop: true, type: EnumDataDef.AudioType.BgMusic);
+        this.RefreshUI();
     }
 
     public override void OnHide()
     {
         base.OnHide();
-
-        AudioManager.Instance.StopAudio(BGMId.MainPanelBGM.ToString());
     }
 
     public override void OnCreate()
@@ -86,10 +87,14 @@ public class MainPanel : UIBase
         {
             AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
             UIManger.Instance.ShowPanel(UIPanelType.SettingPanel.ToString());
+            UIManger.Instance.HidePanel(UIPanelType.MainPanel.ToString());
         }
 
         if (go == ShopButton.gameObject)
         {
+            AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.ShopPanel.ToString());
+            UIManger.Instance.HidePanel(UIPanelType.MainPanel.ToString());
         }
 
         if (go == LogButton.gameObject)
@@ -101,12 +106,30 @@ public class MainPanel : UIBase
         if (go == StartGameButton.gameObject)
         {
             AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
-            UIManger.Instance.ShowPanel(UIPanelType.SelectHeroesPanel.ToString());
-            UIManger.Instance.HidePanel(UIPanelType.MainPanel.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.WaitingPanel.ToString());
         }
 
         if (go == PortraitButton.gameObject)
         {
+        }
+    }
+
+    public override void RefreshUI()
+    {
+        base.RefreshUI();
+
+        UserName.text = DataCenter.Instance.playerData.name;
+        Golds.text = DataCenter.Instance.playerData.golds.ToString();
+        Cash.text = DataCenter.Instance.playerData.cash.ToString();
+
+        if (HeroData.dataMap.ContainsKey(DataCenter.Instance.playerData.PortraitId))
+        {
+            string portraitName = HeroData.dataMap[DataCenter.Instance.playerData.PortraitId].portrait;
+            PortraitButton.image.sprite = Resources.Load(string.Format(PortraitPath, portraitName), typeof(Sprite)) as Sprite;
+        }
+        if (!DataCenter.Instance.playerData.isBgMusicOpen)
+        {
+            AudioManager.Instance.StopAudio(BGMId.MainPanelBGM.ToString());
         }
     }
 }

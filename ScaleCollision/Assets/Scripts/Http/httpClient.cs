@@ -185,6 +185,40 @@ class httpClient : UseHttp
 //        return json.GetInt("result");
     }
 
+    public int ChangeHead(int userId, int headPortrait)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        request.Method = "POST";
+        request.ProtocolVersion = new Version(1, 1);
+        request.Headers.Add("operation:changeHead");
+        request.Headers.Add("userId:" + userId);
+        request.Headers.Add("headPortrait:" + headPortrait);
+        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+        Stream respStream = response.GetResponseStream();
+        StreamReader respStreamReader = new StreamReader(respStream, Encoding.UTF8);
+        string s = respStreamReader.ReadToEnd();
+        JsonData json = JsonMapper.ToObject(s);
+        return Int32.Parse(json["result"].ToString());
+//        JSONObject json = new JSONObject(s);
+//        return json.GetInt("result");
+    }
+
+    public JsonData GetGameRecord(int userId)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        request.Method = "POST";
+        request.ProtocolVersion = new Version(1, 1);
+        request.Headers.Add("operation:getGameRecord");
+        request.Headers.Add("userId:" + userId);
+        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+        Stream respStream = response.GetResponseStream();
+        StreamReader respStreamReader = new StreamReader(respStream, Encoding.UTF8);
+        string s = respStreamReader.ReadToEnd();
+        JsonData json = JsonMapper.ToObject(s);
+        return json;
+//        JSONObject json = new JSONObject(s);
+    }
+
     public int StartGame(int userId)
     {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -205,6 +239,7 @@ class httpClient : UseHttp
         return Int32.Parse(json["port"].ToString());
 //        return json.GetInt("port");
     }
+
     public void startSocketServer(int port)
     {
         socketLink.NewSocketLink(port);

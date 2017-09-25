@@ -15,7 +15,10 @@ namespace EnumDataDef
         AboutUsPanel,     //关于我们界面
         LogPanel,     //战绩界面
         SettingPanel,     //设置界面
+        ShopPanel,    //商城界面
         GamePanel,     //游戏界面
+        LoadingPanel,     //加载界面
+        WaitingPanel,    //等待界面
         TipPanel,     //提示界面
     }
     public enum AudioType
@@ -84,5 +87,11 @@ namespace EnumDataDef
         StartGame,     //转场音效
         On,    //设置On音效
         Off,    //设置Off音效
+    }
+
+    public enum ConsumptionType
+    {
+        Golds,     //用金币购买
+        Cash,    //用点券购买
     }
 }

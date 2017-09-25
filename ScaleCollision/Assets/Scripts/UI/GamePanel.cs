@@ -14,6 +14,8 @@ public class GamePanel : UIBase
     private RectTransform Player;
     private Rigidbody2D PlayerRigi;
 
+    private Image hero;
+
     private List<int> ScaleIdList = new List<int>();
     private List<Sprite> ScaleSprite = new List<Sprite>();
 	private List<UIScale> ScaleList = new List<UIScale>();
@@ -36,6 +38,7 @@ public class GamePanel : UIBase
         base.OnShow(param);
 
         AudioManager.Instance.PlayAudio(BGMId.GameBGM.ToString(), loop: true, type: EnumDataDef.AudioType.BgMusic);
+        RefreshUI();
     }
 
     public override void OnHide()
@@ -60,6 +63,8 @@ public class GamePanel : UIBase
 
         Player = GameObject.Find("Player1").GetComponent<RectTransform>();
         PlayerRigi = GameObject.Find("Player1").GetComponent<Rigidbody2D>();
+
+        hero = GameObject.Find("Player1/hero").GetComponent<Image>();
 
 		JumpButton = GameObject.Find("JumpButton").GetComponent<Button>();
         SkillButton = GameObject.Find("SkillButton").GetComponent<Button>();
@@ -176,5 +181,14 @@ public class GamePanel : UIBase
     {
         if (ScaleIndex >= 0 && ScaleIndex < ScaleList.Count)
             ScaleList[ScaleIndex].PlayAnimation();
+    }
+
+    public override void RefreshUI()
+    {
+        base.RefreshUI();
+
+        hero.sprite = Resources.Load(string.Format("Images/UI/GamePanel/{0}", DataCenter.Instance.playerData.heroSelectId), typeof(Sprite)) as Sprite;
+        hero.SetNativeSize();
+        hero.transform.localScale = new Vector3(-0.2f, 0.2f, 0.2f);
     }
 }

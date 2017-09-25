@@ -62,6 +62,7 @@ public class LoginPanel : UIBase
                 if (isSuccess == 1)
                 {
                     UIManger.Instance.ShowPanel(UIPanelType.MainPanel.ToString());
+                    UIManger.Instance.ShowPanel(UIPanelType.LoadingPanel.ToString());
                     UIManger.Instance.HidePanel(UIPanelType.LoginPanel.ToString());
                 }
                 else if (isSuccess == 2)
@@ -72,7 +73,6 @@ public class LoginPanel : UIBase
                 {
                     TipPanel.ShowTip("抱歉，账号不存在!");
                 }
-                Debug.Log(isSuccess);
             }
             else
             {

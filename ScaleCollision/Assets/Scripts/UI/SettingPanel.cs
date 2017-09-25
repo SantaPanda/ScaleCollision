@@ -31,7 +31,6 @@ public class SettingPanel : UIBase
     private bool isBgMusicOpen = false;
     private bool isSoundOpen = false;
 
-    private string name = "Kirito";
     private int portraitId;
 
     private readonly string portraitPath = "Images/UI/SelectHeroesPanel/Portrait/{0}";
@@ -146,13 +145,16 @@ public class SettingPanel : UIBase
 
         if (go == SureButton.gameObject)
         {
+            ChangeSetting();
             AudioManager.Instance.PlayAudio(SoundId.Click.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.MainPanel.ToString());
             UIManger.Instance.HidePanel(UIPanelType.SettingPanel.ToString());
         }
 
         if (go == ReturnButton.gameObject)
         {
             AudioManager.Instance.PlayAudio(SoundId.Cancel.ToString());
+            UIManger.Instance.ShowPanel(UIPanelType.MainPanel.ToString());
             UIManger.Instance.HidePanel(UIPanelType.SettingPanel.ToString());
         }
     }
@@ -229,6 +231,8 @@ public class SettingPanel : UIBase
     {
         base.RefreshUI();
 
+        isBgMusicOpen = DataCenter.Instance.playerData.isBgMusicOpen;
+        isSoundOpen = DataCenter.Instance.playerData.isSoundOpen;
         if (isBgMusicOpen)
         {
             BgmOn.gameObject.SetActive(true);
@@ -250,8 +254,76 @@ public class SettingPanel : UIBase
             SoundOn.gameObject.SetActive(false);
             SoundOff.gameObject.SetActive(true);
         }
+            
+        Placeholder.text = DataCenter.Instance.playerData.name;
 
-        Placeholder.text = name;
+        portraitId = DataCenter.Instance.playerData.PortraitId;
+        if (HeroData.dataMap.ContainsKey(portraitId))
+        {
+            Portrait.image.sprite = Resources.Load(string.Format(portraitPath, HeroData.dataMap[portraitId].portrait), typeof(Sprite)) as Sprite;
+        }
+    }
+
+    private bool ChangeSetting()
+    {
+        httpClient http = new httpClient();
+
+        if (isSoundOpen != DataCenter.Instance.playerData.isSoundOpen || isBgMusicOpen != DataCenter.Instance.playerData.isBgMusicOpen)
+        {
+            int BgmOpen = isBgMusicOpen ? 1 : 0;
+            int SoundOpen = isSoundOpen ? 1 : 0;
+            Debug.Log(isBgMusicOpen + " " + isSoundOpen);
+            int isSuccess = http.ChangeSetting(DataCenter.Instance.playerData.userId, BgmOpen, SoundOpen);
+            if (isSuccess == 1)
+            {
+                DataCenter.Instance.playerData.isBgMusicOpen = isBgMusicOpen;
+                DataCenter.Instance.playerData.isSoundOpen = isSoundOpen;
+            }
+            else
+            {
+                TipPanel.ShowTip("修改背景音或音效设置失败!");
+                return false;
+            }
+        }
+
+        if(!Name.text.Equals(DataCenter.Instance.playerData.name) && Name.text != null & Name.text != "")
+        {
+            int isSuccess = http.ChangeName(DataCenter.Instance.playerData.userId, Name.text);
+            if (isSuccess == 1)
+            {
+                DataCenter.Instance.playerData.name = Name.text;
+            }
+            else
+            {
+                TipPanel.ShowTip("修改昵称失败!");
+                return false;
+            }
+        }
+
+        if (portraitId != DataCenter.Instance.playerData.PortraitId)
+        {
+            if (DataCenter.Instance.playerData.heroes[portraitId])
+            {
+                int isSuccess = http.ChangeHead(DataCenter.Instance.playerData.userId, portraitId);
+                if (isSuccess == 1)
+                {
+                    DataCenter.Instance.playerData.PortraitId = portraitId;
+                }
+                else
+                {
+                    TipPanel.ShowTip("修改头像失败!");
+                    return false;
+                }
+            }
+            else
+            {
+                TipPanel.ShowTip("抱歉，请购买该英雄才能修改此头像!");
+                return false;
+            }
+        }
+
+        TipPanel.ShowTip("修改设置成功!");
+        return true;
     }
 }
 

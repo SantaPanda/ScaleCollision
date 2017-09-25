@@ -1,36 +1,39 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Http/httpClient.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/TipPanel.cs">
     <Files>
-      <File FileName="Assets/Scripts/UI/LoginPanel.cs" Line="60" Column="45" />
+      <File FileName="Assets/Scripts/UI/LoginPanel.cs" Line="60" Column="1" />
       <File FileName="Assets/Scripts/UIManger/UIManger.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/UI/GamePanel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/SelectHeroesPanel.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/SelectHeroesPanel.cs" Line="92" Column="36" />
       <File FileName="Assets/Scripts/XMLCtrl/XMLHelper.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/UICtrl/UIScale.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameEntrance/GameEntrance.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameEntrance/GameEntrance.cs" Line="15" Column="3" />
       <File FileName="Assets/Scripts/Hero/IHeroSkill.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Data/XML/ScaleData.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Data/XML/HeroData.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Data/XML/HeroData.xml" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Data/XML/HeroData.xml" Line="5" Column="148" />
       <File FileName="Assets/Scripts/UICtrl/UIBase.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Player/GamePlayer.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Hero/Hero.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Data/XML/ScaleData.xml" Line="1" Column="1" />
       <File FileName="Assets/Scripts/XMLCtrl/ConfigData.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/XMLCtrl/ConfigDataT.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Definition/EnumDataDef.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Definition/EnumDataDef.cs" Line="84" Column="30" />
       <File FileName="Assets/Scripts/Audio/AudioManger.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Data/DataCenter/DataCenter.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Data/PlayerData/PlayerData.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/RegisterPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Input/InputPattern.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/RegisterPanel.cs" Line="68" Column="47" />
+      <File FileName="Assets/Scripts/Input/InputPattern.cs" Line="47" Column="21" />
       <File FileName="Assets/Scripts/UI/MainPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/TipPanel.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/TipPanel.cs" Line="55" Column="69" />
       <File FileName="Assets/Scripts/UI/AboutUsPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/LogPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/SettingPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Http/httpClient.cs" Line="25" Column="9" />
+      <File FileName="Assets/Scripts/UI/LogPanel.cs" Line="51" Column="74" />
+      <File FileName="Assets/Scripts/UI/SettingPanel.cs" Line="144" Column="29" />
+      <File FileName="Assets/Scripts/Http/httpClient.cs" Line="3" Column="17" />
+      <File FileName="Assets/Scripts/Http/UseHttp.cs" Line="19" Column="14" />
+      <File FileName="Assets/Scripts/Http/socketLink.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DataManger/DataManger.cs" Line="30" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
